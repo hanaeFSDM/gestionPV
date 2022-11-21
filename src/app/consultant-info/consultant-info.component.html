@@ -1,0 +1,15 @@
+<div class="container">
+    <form>
+
+        <div class="row">
+            <label for="lastName" class="block">Nom</label>
+            <input id="lastName" type="LastName" aria-describedby="username1-help" pInputText name="lastName" [(ngModel)]="consultantInfo.lastName" />
+            <label for="firstName" class="block">Prénom</label>
+            <input id="firstName" type="firstName" aria-describedby="username1-help" pInputText name="firstName" [(ngModel)]="consultantInfo.firstName" />
+        </div>
+        <p-calendar name="rangeDates" [(ngModel)]="consultantInfo.rangeDates" selectionMode="range"></p-calendar>        
+        <div>
+            <button pButton type="button" label="Primary" (click)="showValues()">Click me !</button>
+        </div>
+    </form>
+</div> 
