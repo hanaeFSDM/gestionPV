@@ -19,6 +19,8 @@ export class ConsultantInfoComponent implements OnInit {
     lastName: '',
     rangeDates: []
   };
+
+  fullName: string = 'HAIKI Hanae';
   
   constructor() { }
 
