@@ -31,6 +31,10 @@ export class ConsultantInfoComponent implements OnInit {
       adressemail:[''],
       projets: this.formBuilder.array([
         this.formBuilder.control('')
+      ]),
+      numberphone:[''],
+      profils: this.formBuilder.array([
+        this.formBuilder.control('')
       ])
 
     }) 
@@ -43,6 +47,10 @@ export class ConsultantInfoComponent implements OnInit {
   }
   addProjet() {
     this.projets.push(this.formBuilder.control(''));
+  }
+  get profils() {
+    return this.pvForm.get('profils') as
+     FormArray;
   }
   showValues(){
     console.log(this.pvForm.value)

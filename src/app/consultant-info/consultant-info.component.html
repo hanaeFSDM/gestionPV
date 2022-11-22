@@ -12,6 +12,10 @@
             <label for="adressemail" class="block">Address mail</label>
             <input  id ="adressemail" type ="email" aria-describedby="email"  pInputText formControlName="adressemail"/>
         </div>
+        <div>
+            <label for="numberphone" class="block">Tel</label>
+            <input id="numberPhone" type="number" aria-describedby="number" pInputText formControlName="numberPhone"/>
+        </div>
         <div formArrayName="projets">
             <h2>projets</h2>
             <button type="button" (click)="addProjet()">+ Add another projet</button>
@@ -22,8 +26,17 @@
               <input id="projet-{{ i }}" type="text" [formControlName]="i">
             </div>
         </div>
+        <h3>le calendrie</h3>
         <p-calendar name="rangeDates" selectionMode="range"></p-calendar>        
 
+        <div formArrayName="profils">
+            <h2>profils</h2>
+            <div *ngFor="let projet of profils.controls; let i=index">
+              <!-- The repeated alias template -->
+              <label for="profil-{{ i }}">Profils:</label>
+              <input id="profil-{{ i }}" type="text" [formControlName]="i">
+            </div>
+        </div>
         <div class="action-button">
             <button pButton type="submit" label="Primary" (click)="showValues()">Click me !</button>
         </div>
