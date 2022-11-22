@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule,FormArray } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import { ConsultantInfoComponent } from './consultant-info/consultant-info.component';
 import {CalendarModule} from 'primeng/calendar';

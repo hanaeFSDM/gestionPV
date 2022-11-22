@@ -28,17 +28,17 @@ export class ConsultantInfoComponent implements OnInit {
       firstName:  [''],
       lastName: [''],
       rangeDates: [''],
-      adressemail:['']
-
+      adressemail:[''],
+      projets: this.formBuilder.array([
+        this.formBuilder.control('')
+      ])
 
     }) 
-    projets: this.formBuilder.array([
-      this.formBuilder.control('')
-    ])
+   
     
    }
    get projets() {
-    return this.initForm.get('projets') as
+    return this.pvForm.get('projets') as
      FormArray;
   }
   addProjet() {
