@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule,FormArray} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {CalendarModule} from 'primeng/calendar';
 
@@ -14,22 +14,38 @@ import {CalendarModule} from 'primeng/calendar';
 })
 export class ConsultantInfoComponent implements OnInit {
 
-  consultantInfo: any = {
-    firstName:  '',
-    lastName: '',
-    rangeDates: []
-  };
-
-  fullName: string = 'HAIKI Hanae';
+ 
+  fullName: string = 'GestionPV';
+  pvForm!:FormGroup;
   
-  constructor() { }
+  constructor(private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
+    this.initForm();
   }
+  initForm(){
+    this.pvForm= this.formBuilder.group({
+      firstName:  [''],
+      lastName: [''],
+      rangeDates: [''],
+      adressemail:['']
 
 
+    }) 
+    projets: this.formBuilder.array([
+      this.formBuilder.control('')
+    ])
+    
+   }
+   get projets() {
+    return this.initForm.get('projets') as
+     FormArray;
+  }
+  addProjet() {
+    this.projets.push(this.formBuilder.control(''));
+  }
   showValues(){
-    console.log(this.consultantInfo);
+    console.log(this.pvForm.value)
   };
 
 }

@@ -1,16 +1,31 @@
 <div class="container">
     <h3>{{ fullName }}</h3>
-    <form>
+    <form [formGroup]="pvForm"> 
 
         <div class="row">
             <label for="lastName" class="block">Nom</label>
-            <input id="lastName" type="LastName" aria-describedby="username1-help" pInputText name="lastName" [(ngModel)]="consultantInfo.lastName" />
+            <input id="lastName" type="text" aria-describedby="username1-help" pInputText formControlName="lastName"  />
             <label for="firstName" class="block">Prénom</label>
-            <input id="firstName" type="firstName" aria-describedby="username1-help" pInputText name="firstName" [(ngModel)]="consultantInfo.firstName" />
+            <input id="firstName" type="text" aria-describedby="username1-help" pInputText formControlName="firstName" />
         </div>
-        <p-calendar name="rangeDates" [(ngModel)]="consultantInfo.rangeDates" selectionMode="range"></p-calendar>        
-        <div>
-            <button pButton type="button" label="Primary" (click)="showValues()">Click me !</button>
+        <div class="">
+            <label for="adressemail" class="block">Address mail</label>
+            <input  id ="adressemail" type ="email" aria-describedby="email"  pInputText formControlName="adressemail"/>
+        </div>
+        <div formArrayName="projets">
+            <h2>projets</h2>
+            <button type="button" (click)="addProjet()">+ Add another projet</button>
+          
+            <div *ngFor="let projet of projets.controls; let i=index">
+              <!-- The repeated alias template -->
+              <label for="projet-{{ i }}">Projet:</label>
+              <input id="projet-{{ i }}" type="text" [formControlName]="i">
+            </div>
+          </div>
+        <p-calendar name="rangeDates" selectionMode="range"></p-calendar>        
+
+        <div class="action-button">
+            <button pButton type="submit" label="Primary" (click)="showValues()">Click me !</button>
         </div>
     </form>
 </div> 
