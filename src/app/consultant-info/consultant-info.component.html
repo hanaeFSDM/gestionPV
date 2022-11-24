@@ -1,44 +1,48 @@
 <div class="container">
-    <h3>{{ fullName }}</h3>
+    <h3>**************{{ fullName }}*************</h3>
     <form [formGroup]="pvForm"> 
 
         <div class="row">
-            <label for="lastName" class="block">Nom</label>
+            <h3>Info du consultant</h3>
+            <label for="lastName" class="block">Nom:</label>
             <input id="lastName" type="text" aria-describedby="username1-help" pInputText formControlName="lastName"  />
-            <label for="firstName" class="block">Prénom</label>
+        </div>
+        <div>
+            <label for="firstName" class="block">Prénom:</label>
             <input id="firstName" type="text" aria-describedby="username1-help" pInputText formControlName="firstName" />
         </div>
         <div class="">
-            <label for="adressemail" class="block">Address mail</label>
+            <label for="adressemail" class="block">Address mail :</label>
             <input  id ="adressemail" type ="email" aria-describedby="email"  pInputText formControlName="adressemail"/>
         </div>
         <div>
-            <label for="numberphone" class="block">Tel</label>
+            <label for="numberphone" class="block">Tel :</label>
             <input id="numberPhone" type="number" aria-describedby="number" pInputText formControlName="numberPhone"/>
         </div>
         <div formArrayName="projets">
-            <h2>projets</h2>
-            <button type="button" (click)="addProjet()">+ Add another projet</button>
-          
+            <h3>Projets</h3>
             <div *ngFor="let projet of projets.controls; let i=index">
               <!-- The repeated alias template -->
               <label for="projet-{{ i }}">Projet:</label>
               <input id="projet-{{ i }}" type="text" [formControlName]="i">
+              <button type="button" (click)="addProjet()">+</button>
             </div>
         </div>
-        <h3>le calendrie</h3>
+        <h3>Calendrie</h3>
         <p-calendar name="rangeDates" selectionMode="range"></p-calendar>        
-
         <div formArrayName="profils">
-            <h2>profils</h2>
-            <div *ngFor="let projet of profils.controls; let i=index">
+            <h3>Profils</h3>
+            <div *ngFor="let profils of profils.controls; let i=index">
               <!-- The repeated alias template -->
-              <label for="profil-{{ i }}">Profils:</label>
+              <label for="profil-{{ i }}">Profil:</label>
               <input id="profil-{{ i }}" type="text" [formControlName]="i">
+              <ol>
+                
+             </ol>
             </div>
         </div>
         <div class="action-button">
-            <button pButton type="submit" label="Primary" (click)="showValues()">Click me !</button>
+            <button pButton type="submit" (click)="showValues()">ok</button>
         </div>
     </form>
 </div> 
