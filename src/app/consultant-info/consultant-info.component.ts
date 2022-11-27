@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormBuilder, FormGroup, FormsModule,FormArray} from '@angular/forms';
-import {InputTextModule} from 'primeng/inputtext';
-import {CalendarModule} from 'primeng/calendar';
-
+import { FormBuilder, FormGroup, FormsModule,FormArray, Validators} from '@angular/forms';
+import { ConsultantInfo } from './consultant-info';
+import { PROFILES } from './consultant-info.contants';
 
 @Component({
   selector: 'app-consultant-info',
@@ -14,46 +10,54 @@ import {CalendarModule} from 'primeng/calendar';
 })
 export class ConsultantInfoComponent implements OnInit {
 
- 
   fullName: string = 'GestionPV';
   pvForm!:FormGroup;
-  
+
+  consultantInfo: ConsultantInfo = new ConsultantInfo();
+
+  profiles = PROFILES;
+
   constructor(private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.addNewProject();
   }
+  
   initForm(){
     this.pvForm= this.formBuilder.group({
-      firstName:  [''],
-      lastName: [''],
-      rangeDates: [''],
-      adressemail:[''],
-      projets: this.formBuilder.array([
-        this.formBuilder.control('')
-      ]),
-      numberphone:[''],
-      profils: this.formBuilder.array([
-        this.formBuilder.control('')
-      ])
+      firstName:  ['', Validators.required],
+      lastName: ['', Validators.required],
+      rangeDates: ['', Validators.required],
+      adressemail:['', [Validators.required,Validators.email]],
+      projects: this.formBuilder.array([]),
+      phoneNumber:[''],
+      profile: ['', Validators.required]
+    })    
+  }
 
-    }) 
-   
-    
-   }
-   get projets() {
-    return this.pvForm.get('projets') as
-     FormArray;
+   get projects() {
+    return this.pvForm.controls['projects'] as FormArray;
   }
-  addProjet() {
-    this.projets.push(this.formBuilder.control(''));
+
+  addNewProject() {
+    this.projects.push(this.formBuilder.group({
+      customerName: ['', Validators.required],
+      projectName: ['', Validators.required]
+    }));
   }
-  get profils() {
-    return this.pvForm.get('profils') as
-     FormArray;
+
+  removeProject(index: number) {
+    this.projects.removeAt(index);
   }
-  showValues(){
-    console.log(this.pvForm.value)
+  
+  myFormArray() {
+    return this.pvForm.controls['projectList'].get('projects') as FormArray;
+  }
+  
+  save(){
+    this.consultantInfo = {...this.pvForm.value};
+    console.log(this.consultantInfo);
   };
 
 }

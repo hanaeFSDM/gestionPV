@@ -1,48 +1,46 @@
 <div class="container">
     <h3>**************{{ fullName }}*************</h3>
-    <form [formGroup]="pvForm"> 
+    <form [formGroup]="pvForm" (ngSubmit)="save()">
 
         <div class="row">
             <h3>Info du consultant</h3>
             <label for="lastName" class="block">Nom:</label>
-            <input id="lastName" type="text" aria-describedby="username1-help" pInputText formControlName="lastName"  />
+            <input id="lastName" type="text" class="p-inputtext-sm" pInputText formControlName="lastName" />
         </div>
-        <div>
+        <div class="row">
             <label for="firstName" class="block">Prénom:</label>
-            <input id="firstName" type="text" aria-describedby="username1-help" pInputText formControlName="firstName" />
+            <input id="firstName" type="text" class="p-inputtext-sm" pInputText pInputText formControlName="firstName" />
         </div>
-        <div class="">
+        <div class="row">
             <label for="adressemail" class="block">Address mail :</label>
-            <input  id ="adressemail" type ="email" aria-describedby="email"  pInputText formControlName="adressemail"/>
+            <input id="adressemail" type="email" class="p-inputtext-sm" pInputText formControlName="adressemail" />
         </div>
-        <div>
+        <div class="row">
             <label for="numberphone" class="block">Tel :</label>
-            <input id="numberPhone" type="number" aria-describedby="number" pInputText formControlName="numberPhone"/>
+            <input id="numberPhone" type="text" class="p-inputtext-sm" pInputText formControlName="phoneNumber" />
         </div>
-        <div formArrayName="projets">
-            <h3>Projets</h3>
-            <div *ngFor="let projet of projets.controls; let i=index">
-              <!-- The repeated alias template -->
-              <label for="projet-{{ i }}">Projet:</label>
-              <input id="projet-{{ i }}" type="text" [formControlName]="i">
-              <button type="button" (click)="addProjet()">+</button>
-            </div>
-        </div>
+        <h3>Profils</h3>
+        <p-dropdown [options]="profiles" [editable]="true" formControlName="profile"></p-dropdown>
+
+        <h3>Projets</h3>
+        <ng-container formArrayName="projects">
+            <ng-container *ngFor="let projectForm of projects.controls; let index = index">
+                <div [formGroupName]="index">
+                    <input id="customerName" type="text" class="p-inputtext-sm" pInputText formControlName="customerName" />&nbsp;
+                    <input id="projectName" type="text" class="p-inputtext-sm" pInputText formControlName="projectName" /> &nbsp;
+                    <button pButton (click)="addNewProject()">+</button> &nbsp;
+                    <button pButton (click)="removeProject(index)"
+                        [disabled]="this.projects.controls.length === 1">-</button>
+                </div>
+            </ng-container>
+        </ng-container>
+
         <h3>Calendrie</h3>
-        <p-calendar name="rangeDates" selectionMode="range"></p-calendar>        
-        <div formArrayName="profils">
-            <h3>Profils</h3>
-            <div *ngFor="let profils of profils.controls; let i=index">
-              <!-- The repeated alias template -->
-              <label for="profil-{{ i }}">Profil:</label>
-              <input id="profil-{{ i }}" type="text" [formControlName]="i">
-              <ol>
-                
-             </ol>
-            </div>
-        </div>
+        <p-calendar name="rangeDates" selectionMode="range" formControlName="rangeDates"></p-calendar>
+
+        <br />
         <div class="action-button">
-            <button pButton type="submit" (click)="showValues()">ok</button>
+            <button pButton type="submit" [disabled]="pvForm.invalid">Sauvegarder</button>
         </div>
     </form>
-</div> 
+</div>
