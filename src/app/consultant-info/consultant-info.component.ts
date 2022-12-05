@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule,FormArray, Validators} from '@angular/forms';
 import { ConsultantInfo } from './consultant-info';
 import { PROFILES } from './consultant-info.contants';
+import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-consultant-info',
@@ -9,6 +10,13 @@ import { PROFILES } from './consultant-info.contants';
   styleUrls: ['./consultant-info.component.css']
 })
 export class ConsultantInfoComponent implements OnInit {
+  items!: MenuItem[];
+
+  scrollableItems!: MenuItem[];
+
+  activeItem!: MenuItem;
+
+  activeItem2!: MenuItem;
 
   fullName: string = 'GestionPV';
   pvForm!:FormGroup;
@@ -16,12 +24,25 @@ export class ConsultantInfoComponent implements OnInit {
   consultantInfo: ConsultantInfo = new ConsultantInfo();
 
   profiles = PROFILES;
+  
 
   constructor(private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
+    this.items = [
+      {label: 'Consultant', icon: 'pi pi-fw pi-home'},
+      {label: 'Calendar', icon: 'pi pi-fw pi-calendar'}
+  ];
+  
+  this.scrollableItems = Array.from({ length: 2 });
+
+  this.activeItem = this.items[0];
+
+  this.activeItem2 = this.scrollableItems[0];
     this.initForm();
     this.addNewProject();
+
+
   }
   
   initForm(){
@@ -33,6 +54,7 @@ export class ConsultantInfoComponent implements OnInit {
       projects: this.formBuilder.array([]),
       phoneNumber:[''],
       profile: ['', Validators.required]
+
     })    
   }
 

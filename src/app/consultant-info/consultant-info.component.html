@@ -1,33 +1,42 @@
-<div class="container">
-    <h3>**************{{ fullName }}*************</h3>
-    <form [formGroup]="pvForm" (ngSubmit)="save()">
+<link rel="stylesheet" href="C:\AngularApps\gestionPV\src\app\consultant-info\consultant-info.component.css"/>
 
-        <div class="row">
-            <h3>Info du consultant</h3>
+<div class="container">
+   
+    <h3>{{ fullName }}</h3>
+    <!--<form [formGroup]="pvForm" (ngSubmit)="save()">-->
+        <!--<form {{pvForm}} (ngSubmit)="save()">-->
+            <form [formGroup]="pvForm"> 
+            <form [formGroup]="pvForm" (ngSubmit)="save()">
+                
+                <h3>Info du consultant</h3>
+
+        <div class="row" my-4>
             <label for="lastName" class="block">Nom:</label>
-            <input id="lastName" type="text" class="p-inputtext-sm" pInputText formControlName="lastName" />
+            <input id="lastName" type="text"  placeholder="Saisir le nom" class="p-inputtext-sm" pInputText formControlName="lastName" />
         </div>
-        <div class="row">
+        <div class="row ">
             <label for="firstName" class="block">Prénom:</label>
-            <input id="firstName" type="text" class="p-inputtext-sm" pInputText pInputText formControlName="firstName" />
+            <input id="firstName" type="text"  placeholder="Saisir le Prenom" class="p-inputtext-sm" pInputText pInputText formControlName="firstName" />
         </div>
         <div class="row">
             <label for="adressemail" class="block">Address mail :</label>
-            <input id="adressemail" type="email" class="p-inputtext-sm" pInputText formControlName="adressemail" />
+            <input id="adressemail" type="email" placeholder="Saisir l'adresse" class="p-inputtext-sm" pInputText formControlName="adressemail" />
         </div>
         <div class="row">
             <label for="numberphone" class="block">Tel :</label>
-            <input id="numberPhone" type="text" class="p-inputtext-sm" pInputText formControlName="phoneNumber" />
+            <input id="numberPhone" type="text" placeholder="Saisir le Tel" class="p-inputtext-sm" pInputText formControlName="phoneNumber" />
         </div>
         <h3>Profils</h3>
-        <p-dropdown [options]="profiles" [editable]="true" formControlName="profile"></p-dropdown>
+        <p-dropdown [options]="profiles" [editable]="true" placeholder="Select un profile" formControlName="profile"></p-dropdown>
 
         <h3>Projets</h3>
         <ng-container formArrayName="projects">
             <ng-container *ngFor="let projectForm of projects.controls; let index = index">
                 <div [formGroupName]="index">
-                    <input id="customerName" type="text" class="p-inputtext-sm" pInputText formControlName="customerName" />&nbsp;
-                    <input id="projectName" type="text" class="p-inputtext-sm" pInputText formControlName="projectName" /> &nbsp;
+                    <label for ="customerName" class="block">Nom client:</label>
+                    <input id="customerName" type="text" placeholder="Saisir le nom de client" class="p-inputtext-sm" pInputText formControlName="customerName" />&nbsp;
+                    <label for="projectName" class="block"> Nom de projet :</label>
+                    <input id="projectName" type="text" placeholder="Saisir Nom de peojet " class="p-inputtext-sm" pInputText formControlName="projectName" /> &nbsp;
                     <button pButton (click)="addNewProject()">+</button> &nbsp;
                     <button pButton (click)="removeProject(index)"
                         [disabled]="this.projects.controls.length === 1">-</button>
@@ -35,12 +44,15 @@
             </ng-container>
         </ng-container>
 
-        <h3>Calendrie</h3>
-        <p-calendar name="rangeDates" selectionMode="range" formControlName="rangeDates"></p-calendar>
-
+        <h3>Calll</h3>
+     <div class="field col-12 md:col-4">
+        <label for="multiple">date</label>
+        <p-calendar name="dates" selectionMode="multiple" [readonlyInput]="true" inputId="multiple"></p-calendar>
+     </div>
         <br />
         <div class="action-button">
-            <button pButton type="submit" [disabled]="pvForm.invalid">Sauvegarder</button>
+            <button pButton type="submit" [disabled]="pvForm.valid">Sauvegarder</button>
         </div>
     </form>
-</div>
+   
+    

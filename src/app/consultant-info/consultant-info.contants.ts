@@ -1,1 +1,1 @@
-export const PROFILES = ['Junior', 'Senior'];
+export const PROFILES = ['Junior', 'Senior','Freelance','Stagaire','Debutant'];

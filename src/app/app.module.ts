@@ -9,11 +9,20 @@ import { ConsultantInfoComponent } from './consultant-info/consultant-info.compo
 import {CalendarModule} from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DropdownModule} from 'primeng/dropdown';
+import {TabMenuModule} from 'primeng/tabmenu';
+import {MenuItem} from 'primeng/api';
+import { CalendrieComponent } from './calendrie/calendrie.component';
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConsultantInfoComponent
+    ConsultantInfoComponent,
+    CalendrieComponent
+   
+  
   ],
   imports: [
     BrowserModule,
@@ -23,7 +32,8 @@ import {DropdownModule} from 'primeng/dropdown';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    DropdownModule
+    DropdownModule,
+    TabMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
